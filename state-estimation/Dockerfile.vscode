@@ -90,4 +90,4 @@ RUN pip3 install -U \
     tqdm \
     ipywidgets
 
-RUN pip3 install -U ruamel.yaml-0.18.0
+RUN pip3 install -U ruamel.yaml==0.18.0
