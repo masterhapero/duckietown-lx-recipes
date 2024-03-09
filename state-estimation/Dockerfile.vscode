@@ -76,6 +76,14 @@ LABEL org.duckietown.label.module.type="exercise-vscode" \
 COPY --from=recipe assets/vscode/setup.sh /tmp/vscode_setup.sh
 RUN /tmp/vscode_setup.sh
 
+# install lab.yaml for notebooks / 03-histogram-filter / histogram_filter.ipynb
+RUN mkdir -p "${CATKIN_WS_DIR}/src/dt-ros-commons/packages/duckietown/config/baseline/calibration/camera_intrinsic"
+RUN mkdir -p "${CATKIN_WS_DIR}/src/dt-ros-commons/packages/duckietown/config/baseline/calibration/camera_extrinsic"
+COPY --from=recipe assets/agent/data/config/calibrations/camera_intrinsic/lab.yaml "${CATKIN_WS_DIR}/src/dt-ros-commons/packages/duckietown/config/baseline/calibration/camera_intrinsic"
+COPY --from=recipe assets/agent/data/config/calibrations/camera_intrinsic/default.yaml "${CATKIN_WS_DIR}/src/dt-ros-commons/packages/duckietown/config/baseline/calibration/camera_intrinsic"
+COPY --from=recipe assets/agent/data/config/calibrations/camera_extrinsic/lab.yaml "${CATKIN_WS_DIR}/src/dt-ros-commons/packages/duckietown/config/baseline/calibration/camera_extrinsic"
+COPY --from=recipe assets/agent/data/config/calibrations/camera_extrinsic/default.yaml "${CATKIN_WS_DIR}/src/dt-ros-commons/packages/duckietown/config/baseline/calibration/camera_extrinsic"
+
 # install python libraries
 RUN pip3 install -U \
     duckietown-world-daffy \
